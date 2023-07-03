@@ -1,63 +1,60 @@
 div.ownership-viewer {
-  max-width: max-content;
-  margin: auto 5px;
-  line-height: initial;
-  display: block ruby;
+	max-width: max-content;
+	margin: auto 5px;
+	line-height: initial;
+	display: block ruby;
 }
 
 div.ownership-viewer > a {
-    display:inline-flex;
+	display: inline-flex;
 }
 
-
 .ownership-viewer-user {
-    width: 10px;
-    height: 10px;
-    margin-left: 2px;
-    margin-right: 2px;
-    margin: auto 2px auto 2px;
+	width: 10px;
+	height: 10px;
+	margin-left: 2px;
+	margin-right: 2px;
+	margin: auto 2px auto 2px;
 }
 
 .ownership-viewer-all {
-    width: 0;
-    height: 0;
-    margin: auto 2px auto 2px;
-    border-bottom: 7px solid red;
-    border-top: 7px solid green;
-    border-left: 7px solid yellow;
-    border-right: 7px solid blue;
+	width: 0;
+	height: 0;
+	margin: auto 2px auto 2px;
+	border-bottom: 7px solid red;
+	border-top: 7px solid green;
+	border-left: 7px solid yellow;
+	border-right: 7px solid blue;
 }
 
-
-
 .ownership-viewer-all.ownership-viewer-inherit {
-    /* Move the center point up on the triangle*/
-    border-top-width: 5px;
-    border-bottom-width: 9px;
+	/* Move the center point up on the triangle*/
+	border-top-width: 5px;
+	border-bottom-width: 9px;
 }
 
 .ownership-viewer-inherit {
-    /* Create a downwards triangle */
-    clip-path: polygon(50% 100%, 0 0, 100% 0);
+	/* Create a downwards triangle */
+	clip-path: polygon(50% 100%, 0 0, 100% 0);
 }
 
 .ownership-viewer-limited {
-    /* Create a diamond */
-    -webkit-transform-origin:50% 50%;
-    -ms-transform-origin:50% 50%;
-    transform-origin:50% 50%;
-    
-    -webkit-transform: rotate(45deg);
-    -ms-transform: rotate(45deg);
-    transform: rotate(45deg);
+	/* Create a diamond */
+	-webkit-transform-origin: 50% 50%;
+	-ms-transform-origin: 50% 50%;
+	transform-origin: 50% 50%;
+
+	-webkit-transform: rotate(45deg);
+	-ms-transform: rotate(45deg);
+	transform: rotate(45deg);
 }
 
 .ownership-viewer-observer {
-    /* Create a square */
-    border-radius: 0;
+	/* Create a square */
+	border-radius: 0;
 }
 
 .ownership-viewer-owner {
-    /* Create a circle */
-    border-radius: 50%;
+	/* Create a circle */
+	border-radius: 50%;
 }
