@@ -121,7 +121,6 @@ class OwnershipViewer {
 
 	// Makes the color assigned to each player clearer in the player list if they are inactive.
 	static playerListRendered() {
-		console.log("Ownership Viewer | Player List");
 		let pvUsers = game.users.contents;
 		let pvIdColor = [];
 		for (let x of pvUsers) {
