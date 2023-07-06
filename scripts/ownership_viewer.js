@@ -120,23 +120,18 @@ class OwnershipViewer {
 	}
 
 	// Makes the color assigned to each player clearer in the player list if they are inactive.
-	static playerListRendered() {
-		let pvUsers = game.users.contents;
-		let pvIdColor = [];
-		for (let x of pvUsers) {
-			let pvMyObject = {};
-			pvMyObject.id = x.id;
-			pvMyObject.color = x.color;
-			pvIdColor.push(pvMyObject);
-		}
-		let pvToReplace = "border: 1px solid #000000";
-		let pvReplacee = "border: 1px solid";
-		for (let i = 0; i < document.getElementById("player-list").children.length; i++) {
-			let pvString = document.getElementById("player-list").children[i].innerHTML;
-			if (pvString.toString().search("inactive") > 0) {
-				pvString = pvString.replace(pvToReplace, pvReplacee + pvIdColor[i].color);
-				document.getElementById("player-list").children[i].innerHTML = pvString;
-			}
+	static playerListRendered(list, html, options) {
+		if (!options.showOffline) return;
+		const userIdColorMap = game.users.contents
+			.filter((user) => !user.active)
+			.reduce((map, user) => {
+				map[user.id] = user.color;
+				return map;
+			}, {});
+		const players = html[0].querySelectorAll("span.player-active.inactive");
+		for (let player of players) {
+			const id = player.parentElement.dataset.userId;
+			player.style.borderColor = userIdColorMap[id];
 		}
 	}
 }
