@@ -3,7 +3,7 @@ name: Permission Viewer - Feature request
 about: Suggest an idea for this project
 title: PV - Feature Request - < Subject of the request >
 labels: enhancement
-assignees: Malekal4699
+assignees: mclemente
 
 ---
 
