@@ -3,7 +3,7 @@ name: Permission Viewer - Bug report
 about: Create a report to help us improve
 title: PV Bug Report - <Bug subject>
 labels: bug
-assignees: Malekal4699
+assignees: mclemente
 
 ---
 
