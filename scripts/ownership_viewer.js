@@ -3,6 +3,7 @@ class OwnershipViewer {
 	static directoryRendered(obj, html, data) {
 		// If user isn't a GM, don't continue
 		if (!game.user.isGM) return;
+		if (!obj._getEntryContextOptions) return;
 
 		// Get the current directory's right-click context options, then tore the ownership config option
 		const contextOptions = obj._getEntryContextOptions();
