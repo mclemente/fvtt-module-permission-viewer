@@ -32,19 +32,24 @@ class OwnershipViewer {
 				if (ownership != CONST.DOCUMENT_OWNERSHIP_LEVELS.NONE) {
 					let bg_color = "transparent";
 
+					// Create the div for this ownership definition, with the appropriate class based on the ownership level
+					let user_div = $("<div></div>");
+					user_div.attr("data-user-id", id);
+
 					// And if the ownership definition isn't 'All Players' (default) or a GM, set 'bg_color' to the user's color
 					if (id != "default") {
 						const user = game.users.get(id);
 						if (user) {
 							if (user.isGM) continue;
-							bg_color = user.color;
+							user_div.css({ "background-color": user.color });
+							user_div.attr("data-tooltip", user.name);
+							user_div.attr("data-tooltip-direction", "UP");
 						} else {
 							continue;
 						}
+					} else {
+						user_div.css({ "background-color": "transparent" });
 					}
-					// Create the div for this ownership definition, with the appropriate class based on the ownership level
-					let user_div = $("<div></div>");
-					user_div.attr("data-user-id", id);
 
 					if (ownership === CONST.DOCUMENT_OWNERSHIP_LEVELS.INHERIT) {
 						user_div.addClass("ownership-viewer-inherit");
@@ -61,8 +66,6 @@ class OwnershipViewer {
 					} else {
 						user_div.addClass("ownership-viewer-user");
 					}
-
-					user_div.css({ "background-color": bg_color });
 
 					// Store the resulting div and keep iterating through the other ownership definitions on the document
 					users.push(user_div);
