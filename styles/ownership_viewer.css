@@ -9,6 +9,10 @@ div.ownership-viewer > a {
 	display: inline-flex;
 }
 
+div.ownership-viewer div {
+	background-color: transparent;
+}
+
 .ownership-viewer-user {
 	width: 10px;
 	height: 10px;
