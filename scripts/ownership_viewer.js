@@ -26,7 +26,7 @@ class OwnershipViewer {
 
 			// Iterate through each ownership definition on the document
 			for (let id in document.ownership) {
-				let ownership = document.ownership[id];
+				let ownership = document.ownership[id] ?? 0;
 
 				// If the ownership definition isn't 'None'...
 				if (ownership != CONST.DOCUMENT_OWNERSHIP_LEVELS.NONE) {
