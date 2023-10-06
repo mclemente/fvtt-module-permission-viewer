@@ -1,9 +1,7 @@
 class OwnershipViewer {
 	// Creates and applies the OwnershipViewer div to each document in a directory - called when each directory renders.
 	static directoryRendered(obj, html, data) {
-		// If user isn't a GM, don't continue
-		if (!game.user.isGM) return;
-		if (!obj._getEntryContextOptions) return;
+		if (!game.user.isGM || !obj._getEntryContextOptions) return;
 
 		// Get the current directory's right-click context options, then tore the ownership config option
 		const contextOptions = obj._getEntryContextOptions();
@@ -13,30 +11,28 @@ class OwnershipViewer {
 		const isJournalSheet = obj.constructor.name === "JournalSheet";
 
 		// Gather all documents in the current directory or journal
-		var collection = isJournalSheet ? obj.object.collections.pages : obj.constructor.collection;
-
-		var document_list = html.find(`li.directory-item${isJournalSheet ? ".level1" : ".document"}`);
+		const collection = isJournalSheet ? obj.object.collections.pages : obj.constructor.collection;
+		const documentList = html.find(`li.directory-item${isJournalSheet ? ".level1" : ".document"}`);
 
 		// Interate through each directory list item.
-		for (let li of document_list) {
+		for (let li of documentList) {
 			// Match it to the corresponding document
 			li = $(li);
-			var document = collection.get(li.attr(`data-${isJournalSheet ? "page" : "document"}-id`));
-			let users = [];
+			const documentId = collection.get(li.attr(`data-${isJournalSheet ? "page" : "document"}-id`));
+			const users = [];
 
 			// Iterate through each ownership definition on the document
-			for (let id in document.ownership) {
-				let ownership = document.ownership[id] ?? 0;
+			for (let id in documentId.ownership) {
+				const ownership = documentId.ownership[id] ?? 0;
 
 				// If the ownership definition isn't 'None'...
-				if (ownership != CONST.DOCUMENT_OWNERSHIP_LEVELS.NONE) {
+				if (ownership !== CONST.DOCUMENT_OWNERSHIP_LEVELS.NONE) {
 					// Create the div for this ownership definition, with the appropriate class based on the ownership level
-					let user_div = $("<div></div>");
-					user_div.attr("data-user-id", id);
+					const user_div = $(`<div data-user-id=${id}></div>`);
 
 					// And if the ownership definition isn't 'All Players' (default) or a GM, set 'bg_color' to the user's color
 					const user = game.users.get(id);
-					if (id != "default") {
+					if (id !== "default") {
 						if (user && !user.isGM) {
 							user_div.css({ "background-color": user.color });
 							user_div.attr("data-tooltip", user.name);
@@ -64,14 +60,15 @@ class OwnershipViewer {
 				}
 			}
 
-			let div = $('<div class="ownership-viewer"></div>');
+			const div = $('<div class="ownership-viewer"></div>');
 
 			// Append the collection of divs to the document's list item, or add the 'none set' icon if empty
 			if (ownershipOption) {
-				if (users.length === 0) users.push($('<div><i class="fas fa-share-alt" style="color: white;"/></div>'));
-				let a = $(`<a href="#"></a>`);
-				div.append(a);
-				a.append(...users);
+				if (users.length === 0)
+					users.push($('<div><i class="fas fa-share-alt" style="color: white;"></i></div>'));
+				const anchor = $(`<a href="#"></a>`);
+				div.append(anchor);
+				anchor.append(...users);
 			} else {
 				div.append(...users);
 			}
@@ -86,21 +83,22 @@ class OwnershipViewer {
 
 		// Ensure any clicks on the OwnershipViewer div open the ownership config for that document
 		if (ownershipOption) {
-			function register_click_events() {
+			function registerClickEvents() {
 				html.find(".ownership-viewer").click((event) => {
 					event.preventDefault();
 					event.stopPropagation();
-					let li = $(event.currentTarget).closest("li");
+					const li = $(event.currentTarget).closest("li");
 					if (li) ownershipOption.callback(li);
 				});
 			}
+
 			if (isJournalSheet) {
 				// On journal sheets, delay registering click events until the page is selected and its header is expanded
 				Hooks.once("renderJournalPageSheet", () => {
-					register_click_events();
+					registerClickEvents();
 				});
 			} else {
-				register_click_events();
+				registerClickEvents();
 			}
 		}
 	}
