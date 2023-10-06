@@ -18,12 +18,12 @@ class OwnershipViewer {
 		for (let li of documentList) {
 			// Match it to the corresponding document
 			li = $(li);
-			const documentId = collection.get(li.attr(`data-${isJournalSheet ? "page" : "document"}-id`));
+			const document = collection.get(li.attr(`data-${isJournalSheet ? "page" : "document"}-id`));
 			const users = [];
 
 			// Iterate through each ownership definition on the document
-			for (let id in documentId.ownership) {
-				const ownership = documentId.ownership[id] ?? 0;
+			for (let id in document.ownership) {
+				const ownership = document.ownership[id] ?? 0;
 
 				// If the ownership definition isn't 'None'...
 				if (ownership !== CONST.DOCUMENT_OWNERSHIP_LEVELS.NONE) {
