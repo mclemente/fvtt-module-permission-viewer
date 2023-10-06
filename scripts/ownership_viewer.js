@@ -64,8 +64,9 @@ class OwnershipViewer {
 
 			// Append the collection of divs to the document's list item, or add the 'none set' icon if empty
 			if (ownershipOption) {
-				if (users.length === 0)
+				if (users.length === 0) {
 					users.push($('<div><i class="fas fa-share-alt" style="color: white;"></i></div>'));
+				}
 				const anchor = $(`<a href="#"></a>`);
 				div.append(anchor);
 				anchor.append(...users);
