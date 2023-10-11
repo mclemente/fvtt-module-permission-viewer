@@ -18,13 +18,13 @@ div.ownership-viewer div {
 	height: 10px;
 	margin-left: 2px;
 	margin-right: 2px;
-	margin: auto 2px auto 2px;
+	margin: auto 2px;
 }
 
 .ownership-viewer-all {
 	width: 0;
 	height: 0;
-	margin: auto 2px auto 2px;
+	margin: auto 2px;
 	border-bottom: 7px solid red;
 	border-top: 7px solid green;
 	border-left: 7px solid yellow;
