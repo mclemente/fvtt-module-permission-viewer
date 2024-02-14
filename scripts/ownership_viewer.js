@@ -8,7 +8,7 @@ class OwnershipViewer {
 		const ownershipOption = contextOptions.find((e) => e.name === "OWNERSHIP.Configure");
 
 		// Determine if we are working with a directory or a journal sheet
-		const isJournalSheet = obj.constructor.name === "JournalSheet";
+		const isJournalSheet = obj instanceof JournalSheet;
 
 		// Gather all documents in the current directory or journal
 		const collection = isJournalSheet ? obj.object.collections.pages : obj.constructor.collection;
