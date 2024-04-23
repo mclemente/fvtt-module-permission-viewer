@@ -5,11 +5,12 @@ div.ownership-viewer {
 	display: block ruby;
 }
 
-div.ownership-viewer > a {
+div.ownership-viewer > div {
 	display: inline-flex;
+	cursor: pointer;
 }
 
-div.ownership-viewer div {
+div.ownership-viewer > div > div {
 	background-color: transparent;
 }
 

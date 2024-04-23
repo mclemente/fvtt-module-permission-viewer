@@ -67,7 +67,7 @@ class OwnershipViewer {
 				if (users.length === 0) {
 					users.push($('<div><i class="fas fa-share-alt" style="color: white;"></i></div>'));
 				}
-				const anchor = $(`<a href="#"></a>`);
+				const anchor = "<div></div>";
 				div.append(anchor);
 				anchor.append(...users);
 			} else {
