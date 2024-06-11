@@ -1,3 +1,4 @@
+
 class OwnershipViewer {
 	// Creates and applies the OwnershipViewer div to each document in a directory - called when each directory renders.
 	static directoryRendered(obj, html, data) {
@@ -41,7 +42,7 @@ class OwnershipViewer {
 						}
 					}
 
-					const ownerships = invertObject(CONST.DOCUMENT_OWNERSHIP_LEVELS);
+					const ownerships = foundry.utils.invertObject(CONST.DOCUMENT_OWNERSHIP_LEVELS);
 					user_div.addClass(`ownership-viewer-${ownerships[ownership].toLowerCase()}`);
 					user_div.attr(
 						"data-tooltip",
