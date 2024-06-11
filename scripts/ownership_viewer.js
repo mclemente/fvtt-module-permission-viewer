@@ -1,4 +1,3 @@
-
 class OwnershipViewer {
 	// Creates and applies the OwnershipViewer div to each document in a directory - called when each directory renders.
 	static directoryRendered(obj, html, data) {
