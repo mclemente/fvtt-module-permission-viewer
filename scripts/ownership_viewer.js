@@ -41,7 +41,7 @@ class OwnershipViewer {
 						}
 					}
 
-					const ownerships = invertObject(CONST.DOCUMENT_OWNERSHIP_LEVELS);
+					const ownerships = foundry.utils.invertObject(CONST.DOCUMENT_OWNERSHIP_LEVELS);
 					user_div.addClass(`ownership-viewer-${ownerships[ownership].toLowerCase()}`);
 					user_div.attr(
 						"data-tooltip",
