@@ -1,9 +1,7 @@
 ---
-name: Permission Viewer - Feature request
+name: Feature request
 about: Suggest an idea for this project
-title: PV - Feature Request - < Subject of the request >
 labels: enhancement
-assignees: mclemente
 
 ---
 
