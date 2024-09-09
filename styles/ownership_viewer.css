@@ -1,3 +1,7 @@
+aside.journal-sidebar.collapsed div.ownership-viewer {
+	display: none;
+}
+
 div.ownership-viewer {
 	max-width: max-content;
 	margin: auto 5px;
