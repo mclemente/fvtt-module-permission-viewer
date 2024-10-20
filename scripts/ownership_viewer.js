@@ -27,35 +27,35 @@ class OwnershipViewer {
 				// If the ownership definition isn't 'None'...
 				if (ownership !== CONST.DOCUMENT_OWNERSHIP_LEVELS.NONE) {
 					// Create the div for this ownership definition, with the appropriate class based on the ownership level
-					const user_div = document.createElement("div");
-					user_div.dataset["userId"] = id;
+					const userDiv = document.createElement("div");
+					userDiv.dataset.userId = id;
 
 					// And if the ownership definition isn't 'All Players' (default) or a GM, set 'bg_color' to the user's color
 					const user = game.users.get(id);
 					if (id !== "default") {
 						if (user && !user.isGM) {
-							user_div.style.backgroundColor = user.color;
-							user_div.dataset["tooltip"] = user.name;
+							userDiv.style.backgroundColor = user.color;
+							userDiv.dataset.tooltip = user.name;
 						} else {
 							continue;
 						}
 					}
 
 					const ownerships = foundry.utils.invertObject(CONST.DOCUMENT_OWNERSHIP_LEVELS);
-					user_div.classList.add(`ownership-viewer-${ownerships[ownership].toLowerCase()}`);
-					user_div.dataset["tooltip"] = `${user ? user.name + ": " : ""} ${game.i18n.localize(
+					userDiv.classList.add(`ownership-viewer-${ownerships[ownership].toLowerCase()}`);
+					userDiv.dataset.tooltip = `${user ? user.name + ": " : ""} ${game.i18n.localize(
 						"OWNERSHIP." + ownerships[ownership]
 					)}`;
-					user_div.dataset["tooltipDirection"] = "UP";
+					userDiv.dataset.tooltipDirection = "UP";
 
 					if (id == "default") {
-						user_div.classList.add("ownership-viewer-all");
+						userDiv.classList.add("ownership-viewer-all");
 					} else {
-						user_div.classList.add("ownership-viewer-user");
+						userDiv.classList.add("ownership-viewer-user");
 					}
 
 					// Store the resulting div and keep iterating through the other ownership definitions on the document
-					users.push(user_div);
+					users.push(userDiv);
 				}
 			}
 
@@ -65,12 +65,12 @@ class OwnershipViewer {
 			// Append the collection of divs to the document's list item, or add the 'none set' icon if empty
 			if (ownershipOption) {
 				if (users.length === 0) {
-					const user_div = document.createElement("div");
+					const userDiv = document.createElement("div");
 					const icon = document.createElement("i");
 					icon.classList.add("fas", "fa-share-alt");
 					icon.style.color = "white";
-					user_div.appendChild(icon);
-					users.push(user_div);
+					userDiv.appendChild(icon);
+					users.push(userDiv);
 				}
 				const anchor = document.createElement("div");
 				div.appendChild(anchor);
@@ -111,10 +111,10 @@ class OwnershipViewer {
 
 	// Update the user color in OwnershipViewer divs if the user is edited
 	static userUpdated(user) {
-		for (let user_div of $(".ownership-viewer-user")) {
-			let id = $(user_div).attr("data-user-id");
+		for (let userDiv of $(".ownership-viewer-user")) {
+			let id = $(userDiv).attr("data-user-id");
 			if (id == user.id) {
-				$(user_div).css("background-color", user.color);
+				$(userDiv).css("background-color", user.color);
 			}
 		}
 	}
