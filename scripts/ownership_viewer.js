@@ -17,42 +17,41 @@ class OwnershipViewer {
 		// Interate through each directory list item.
 		for (let li of documentList) {
 			// Match it to the corresponding document
-			li = $(li);
-			const document = collection.get(li.attr(`data-${isJournalSheet ? "page" : "document"}-id`));
+			const doc = collection.get(li.getAttribute(`data-${isJournalSheet ? "page" : "document"}-id`));
 			const users = [];
 
 			// Iterate through each ownership definition on the document
-			for (let id in document.ownership) {
-				const ownership = document.ownership[id] ?? 0;
+			for (let id in doc.ownership) {
+				const ownership = doc.ownership[id] ?? 0;
 
 				// If the ownership definition isn't 'None'...
 				if (ownership !== CONST.DOCUMENT_OWNERSHIP_LEVELS.NONE) {
 					// Create the div for this ownership definition, with the appropriate class based on the ownership level
-					const user_div = $(`<div data-user-id=${id}></div>`);
+					const user_div = document.createElement("div");
+					user_div.dataset["userId"] = id;
 
 					// And if the ownership definition isn't 'All Players' (default) or a GM, set 'bg_color' to the user's color
 					const user = game.users.get(id);
 					if (id !== "default") {
 						if (user && !user.isGM) {
-							user_div.css({ "background-color": user.color });
-							user_div.attr("data-tooltip", user.name);
+							user_div.style.backgroundColor = user.color;
+							user_div.dataset["tooltip"] = user.name;
 						} else {
 							continue;
 						}
 					}
 
 					const ownerships = foundry.utils.invertObject(CONST.DOCUMENT_OWNERSHIP_LEVELS);
-					user_div.addClass(`ownership-viewer-${ownerships[ownership].toLowerCase()}`);
-					user_div.attr(
-						"data-tooltip",
-						`${user ? user.name + ": " : ""} ${game.i18n.localize("OWNERSHIP." + ownerships[ownership])}`
-					);
-					user_div.attr("data-tooltip-direction", "UP");
+					user_div.classList.add(`ownership-viewer-${ownerships[ownership].toLowerCase()}`);
+					user_div.dataset["tooltip"] = `${user ? user.name + ": " : ""} ${game.i18n.localize(
+						"OWNERSHIP." + ownerships[ownership]
+					)}`;
+					user_div.dataset["tooltipDirection"] = "UP";
 
 					if (id == "default") {
-						user_div.addClass("ownership-viewer-all");
+						user_div.classList.add("ownership-viewer-all");
 					} else {
-						user_div.addClass("ownership-viewer-user");
+						user_div.classList.add("ownership-viewer-user");
 					}
 
 					// Store the resulting div and keep iterating through the other ownership definitions on the document
@@ -60,25 +59,31 @@ class OwnershipViewer {
 				}
 			}
 
-			const div = $('<div class="ownership-viewer"></div>');
+			const div = document.createElement("div");
+			div.classList.add("ownership-viewer");
 
 			// Append the collection of divs to the document's list item, or add the 'none set' icon if empty
 			if (ownershipOption) {
 				if (users.length === 0) {
-					users.push($('<div><i class="fas fa-share-alt" style="color: white;"></i></div>'));
+					const user_div = document.createElement("div");
+					const icon = document.createElement("i");
+					icon.classList.add("fas", "fa-share-alt");
+					icon.style.color = "white";
+					user_div.appendChild(icon);
+					users.push(user_div);
 				}
-				const anchor = $("<div></div>");
-				div.append(anchor);
-				anchor.append(...users);
+				const anchor = document.createElement("div");
+				div.appendChild(anchor);
+				users.forEach((user) => anchor.appendChild(user));
 			} else {
-				div.append(...users);
+				users.forEach((user) => div.appendChild(user));
 			}
 
 			if (isJournalSheet) {
-				li.find(".page-ownership").remove();
-				li.find(".page-heading").append(div);
+				li.querySelector(".page-ownership").remove();
+				li.querySelector(".page-heading").appendChild(div);
 			} else {
-				li.append(div);
+				li.appendChild(div);
 			}
 		}
 
