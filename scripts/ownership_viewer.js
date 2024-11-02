@@ -80,8 +80,8 @@ class OwnershipViewer {
 			}
 
 			if (isJournalSheet) {
-				li.querySelector(".page-ownership").remove();
-				li.querySelector(".page-heading").appendChild(div);
+				li.querySelector(".page-ownership")?.remove();
+				li.querySelector(".page-heading")?.appendChild(div);
 			} else {
 				li.appendChild(div);
 			}
