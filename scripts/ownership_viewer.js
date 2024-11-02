@@ -90,7 +90,7 @@ class OwnershipViewer {
 		// Ensure any clicks on the OwnershipViewer div open the ownership config for that document
 		if (ownershipOption) {
 			function registerClickEvents() {
-				html.find(".ownership-viewer").click((event) => {
+				html.find(".ownership-viewer").on("click", (event) => {
 					event.preventDefault();
 					event.stopPropagation();
 					const li = $(event.currentTarget).closest("li");
