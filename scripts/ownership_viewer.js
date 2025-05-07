@@ -146,7 +146,6 @@ class OwnershipViewer {
 
 Hooks.on("renderJournalSheet", OwnershipViewer.directoryRendered);
 Hooks.on("renderJournalDirectory", OwnershipViewer.directoryRendered);
-// Hooks.on("renderSceneDirectory", OwnershipViewer.directoryRendered);
 Hooks.on("renderActorDirectory", OwnershipViewer.directoryRendered);
 Hooks.on("renderItemDirectory", OwnershipViewer.directoryRendered);
 Hooks.on("renderMacroDirectory", OwnershipViewer.directoryRendered);
