@@ -19,11 +19,7 @@ The color of the dots represents the color of the player. In the case of a defau
 ![screenshot](./images/player-list.png)
 
 # Known Issues
-Module compatibility issues:
-* smol-foundry: resizing Scenes to smaller values will cause PV icons to be offset.
-
-# Changelog
-`https://github.com/League-of-Foundry-Developers/fvtt-module-permission-viewer/CHANGELOG.md`
+On Journal Entries, you can't click the Ownership button on the page you are reading.
 
 # License
 This Foundry VTT module, writen by KaKaRoTo, is licensed under a [Creative Commons Attribution 4.0 International License](http://creativecommons.org/licenses/by/4.0/).
